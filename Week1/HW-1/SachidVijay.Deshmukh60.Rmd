@@ -1,0 +1,105 @@
+---
+title: "Data 605 Homework Week-1"
+output:
+  html_document:
+    css: ./lab.css
+    highlight: pygments
+    theme: cerulean
+  pdf_document: default
+---
+
+##---------------------------------------------------------------------------
+###**Student Name :** Sachid Deshmukh
+###**Date :** 02/05/2019
+
+* > [GitHub Location for rmd 
+file](https://github.com/mlforsachid/MSDSQ2Data605/blob/master/Week1/Discussion/SachidVijay.Deshmukh60.Rmd)
+
+* > [RPubs location of published file](http://rpubs.com/sachid/Data605Week1HW)
+
+##---------------------------------------------------------------------------
+
+#### Problem Set-1
+
+* **Calculate the dot product u.v where u = [0.5, 0.5] and v = [3, ???4]**
+
+```{r}
+u = c(0.5, 0.5)
+v = c(3, -4)
+dot.prod = u %*%  v
+print(dot.prod)
+```
+
+* **What are the lengths of u and v**
+
+```{r}
+length.u = sqrt(u %*% u)
+length.v = sqrt(v %*% v)
+print(length.u)
+print(length.v)
+```
+
+* **What is the linear combination: 3u ??? 2v?**
+
+```{r}
+lin.comb = (3 * u) - (2 * v)
+print(lin.comb)
+```
+
+* **What is the angle between u and v**
+
+```{r}
+angle <- function(x,y){
+  dot.prod <- x%*%y 
+  norm.x <- norm(x,type="2")
+  norm.y <- norm(y,type="2")
+  theta <- acos(dot.prod / (norm.x * norm.y))
+  #convert from radians to degrees
+  theta = theta * (180/pi)
+  as.numeric(theta)
+}
+
+angle(u , v)
+```
+
+#### Problem Set-2
+
+
+* > Source : https://stackoverflow.com/questions/16044377/how-to-do-gaussian-elimination-in-r-do-not-use-solve
+
+```{r}
+substitute_solve <- function(A,B){
+
+p <- nrow(A)
+(U.pls <- cbind(A,b))
+
+U.pls[1,] <- U.pls[1,]/U.pls[1,1]
+
+for (i in 2:p){
+ for (j in i:p) {
+  U.pls[j, ] <- U.pls[j, ] - U.pls[i-1, ] * U.pls[j, i-1]
+ }
+ U.pls[i,] <- U.pls[i,]/U.pls[i,i]
+}
+
+for (i in p:2){
+ for (j in i:2-1) {
+  U.pls[j, ] <- U.pls[j, ] - U.pls[i, ] * U.pls[j, i]
+ }
+}
+U.pls
+}
+
+A <- matrix(c(1,1,3,2,-1,5,-1,-2,4), nrow = 3, ncol = 3, byrow = TRUE)
+b <- matrix(c(1,2,6), nrow = 3, ncol = 1)
+
+#Test our function
+result = substitute_solve(A,b)
+print(result[,4])
+```
+
+**Verify Results**
+
+```{r}
+solve (A,b)
+```
