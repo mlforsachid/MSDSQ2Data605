@@ -13,7 +13,7 @@ output:
 ###**Date :** 02/09/2019
 
 * > [GitHub Location for rmd 
-file](https://github.com/mlforsachid/MSDSQ2Data605/blob/master/Week1/HW-1/SachidVijay.Deshmukh60.Rmd)
+file](https://github.com/mlforsachid/MSDSQ2Data605/blob/master/Week2/HW-2/SachidVijay.Deshmukh60.Rmd)
 
 * > [RPubs location of published file](http://rpubs.com/sachid/Data605Week2HW)
 
@@ -27,13 +27,18 @@ If A is an mXn matrix where m = no of rows and n = no of columns and m != n then
 
 
 ```{r}
+tryCatch(
+  {
 A <- matrix(c(3,5,7,6,4,2), nrow=2, byrow=TRUE)
 At <- t(A)
 
 AAT = A %*% At
 ATA = At %*% A
 
-print(AAT == ATA)
+
+  AAT== ATA
+  },error = function(e){(print (e))
+})
 ```
 
 * **For a special type of square matrix A, we get AT*A = A*AT Under what conditions could this be true?**
