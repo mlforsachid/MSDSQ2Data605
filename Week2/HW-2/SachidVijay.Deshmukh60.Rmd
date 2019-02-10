@@ -1,0 +1,83 @@
+---
+title: "Data 605 Homework Week-2"
+output:
+  html_document:
+    css: ./lab.css
+    highlight: pygments
+    theme: cerulean
+  pdf_document: default
+---
+
+##---------------------------------------------------------------------------
+###**Student Name :** Sachid Deshmukh
+###**Date :** 02/09/2019
+
+* > [GitHub Location for rmd 
+file](https://github.com/mlforsachid/MSDSQ2Data605/blob/master/Week1/HW-1/SachidVijay.Deshmukh60.Rmd)
+
+* > [RPubs location of published file](http://rpubs.com/sachid/Data605Week2HW)
+
+##---------------------------------------------------------------------------
+
+#### Problem Set-1
+
+* **Show that AT*A != A*AT n general. (Proof and demonstration.)**
+
+If A is an mXn matrix where m = no of rows and n = no of columns and m != n then A*AT will be mXm matrix and AT*A will be  nxn matrix. since m !=n these two results can not be same
+
+
+```{r}
+A <- matrix(c(3,5,7,6,4,2), nrow=2, byrow=TRUE)
+At <- t(A)
+
+AAT = A %*% At
+ATA = At %*% A
+
+print(AAT == ATA)
+```
+
+* **For a special type of square matrix A, we get AT*A = A*AT Under what conditions could this be true?**
+
+This can be true for a matrix where m = n and AT = A
+
+```{r}
+A <- matrix(c(4,5,3,5,4,3,3,3,8), nrow=3, byrow=TRUE)
+At <- t(A)
+
+AAT = A %*% At
+ATA = At %*% A
+
+print(AAT == ATA)
+
+```
+
+#### Problem Set-2
+
+```{r}
+
+MatrixDecomposition <- function(A) {
+  
+  U <- A
+  n <- dim(A)[1]
+  L <- diag(n)
+  
+  
+  # For loops to construct LTM and UTM
+  for(i in 2:n) {
+    for(j in 1:(i-1)) {
+      multiplier <- -U[i,j] / U[j,j]
+      U[i, ] <- multiplier * U[j, ] + U[i, ]
+      L[i,j] <- -multiplier
+    }
+  }
+  return(list(L,U))
+}
+
+A <- matrix(c(5,8,-1,2,12,9,7,8,11), nrow=3, byrow=TRUE)
+LU <- MatrixDecomposition(A)
+L<-LU[[1]]  
+U<-LU[[2]]
+
+A == L %*% U
+
+```
