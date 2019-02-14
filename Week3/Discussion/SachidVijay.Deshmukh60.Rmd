@@ -11,7 +11,7 @@ output:
 ##---------------------------------------------------------------------------
 ###**Student Name :** Sachid Deshmukh
 ###**Date :** 02/05/2019
-* > [GitHub Location for rmd file](https://github.com/mlforsachid/MSDSQ2Data605/blob/master/Week2/Discussion/SachidVijay.Deshmukh60.Rmd)
+* > [GitHub Location for rmd file](https://github.com/mlforsachid/MSDSQ2Data605/blob/master/Week3/Discussion/SachidVijay.Deshmukh60.Rmd)
 
 * > [RPubs location of published file](http://rpubs.com/sachid/Data605Week3Disc)
 
@@ -20,11 +20,14 @@ output:
 #### C19 Find the eigenvalues, eigenspaces, algebraic multiplicities and geometric multiplicities for the matrix below. It is possible to do all these computations by hand, and it would be instructive to do so.
 
 ```{r}
+library("knitr")
  mat = matrix(c (-1,2,-6,6), ncol=2 , nrow=2, byrow=T)
  print(mat)
 ```
 
-
+```{r}
+include_graphics('https://raw.githubusercontent.com/mlforsachid/MSDSQ2Data605/blob/master/Week3/Discussion/C19.png')
+```
  
  **Verify using R**
  ```{r}
