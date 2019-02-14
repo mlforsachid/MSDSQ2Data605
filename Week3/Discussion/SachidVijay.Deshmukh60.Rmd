@@ -10,7 +10,7 @@ output:
 
 ##---------------------------------------------------------------------------
 ###**Student Name :** Sachid Deshmukh
-###**Date :** 02/05/2019
+###**Date :** 02/13/2019
 * > [GitHub Location for rmd file](https://github.com/mlforsachid/MSDSQ2Data605/blob/master/Week3/Discussion/SachidVijay.Deshmukh60.Rmd)
 
 * > [RPubs location of published file](http://rpubs.com/sachid/Data605Week3Disc)
@@ -26,7 +26,7 @@ library("knitr")
 ```
 
 ```{r}
-include_graphics('https://raw.githubusercontent.com/mlforsachid/MSDSQ2Data605/blob/master/Week3/Discussion/C19.png')
+include_graphics('https://github.com/mlforsachid/MSDSQ2Data605/blob/master/Week3/Discussion/C19.jpg?raw=true')
 ```
  
  **Verify using R**
@@ -35,6 +35,7 @@ include_graphics('https://raw.githubusercontent.com/mlforsachid/MSDSQ2Data605/bl
  print("Eigen Values are...")
  print(eigen.stat$value)
  print("Eigen Vectors are...")
- print(eigen.stat$vectors)
+ print(eigen.stat$vectors[1:2])
+ print(eigen.stat$vectors[3:4])
  ```
  
