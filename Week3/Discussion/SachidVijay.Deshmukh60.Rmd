@@ -1,0 +1,37 @@
+---
+title: "Data 605 Discussion Week-3"
+output:
+  html_document:
+    css: ./lab.css
+    highlight: pygments
+    theme: cerulean
+  pdf_document: default
+---
+
+##---------------------------------------------------------------------------
+###**Student Name :** Sachid Deshmukh
+###**Date :** 02/05/2019
+* > [GitHub Location for rmd file](https://github.com/mlforsachid/MSDSQ2Data605/blob/master/Week2/Discussion/SachidVijay.Deshmukh60.Rmd)
+
+* > [RPubs location of published file](http://rpubs.com/sachid/Data605Week3Disc)
+
+##---------------------------------------------------------------------------
+
+#### C19 Find the eigenvalues, eigenspaces, algebraic multiplicities and geometric multiplicities for the matrix below. It is possible to do all these computations by hand, and it would be instructive to do so.
+
+```{r}
+ mat = matrix(c (-1,2,-6,6), ncol=2 , nrow=2, byrow=T)
+ print(mat)
+```
+
+
+ 
+ **Verify using R**
+ ```{r}
+ eigen.stat = eigen(mat)
+ print("Eigen Values are...")
+ print(eigen.stat$value)
+ print("Eigen Vectors are...")
+ print(eigen.stat$vectors)
+ ```
+ 
