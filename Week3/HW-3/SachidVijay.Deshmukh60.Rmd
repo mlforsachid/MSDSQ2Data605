@@ -13,12 +13,13 @@ output:
 ###**Date :** 02/14/2019
 
 * > [GitHub Location for rmd 
-file](https://github.com/mlforsachid/MSDSQ2Data605/blob/master/Week2/HW-2/SachidVijay.Deshmukh60.Rmd)
+file](https://github.com/mlforsachid/MSDSQ2Data605/blob/master/Week3/HW-3/SachidVijay.Deshmukh60.Rmd)
 
 * > [RPubs location of published file](http://rpubs.com/sachid/Data605Week3HW)
 
 ##---------------------------------------------------------------------------
 
+### Problem set 1
 
 * **What is the rank of the matrix A?**
 
@@ -54,4 +55,23 @@ Verify using R
 
 ```{r}
 print(Rank(B))
+```
+
+### Problem set 2
+
+* **Compute the eigenvalues and eigenvectors of the matrix A.**
+
+```{r}
+A <- matrix(c(1,2,3,0,4,5,0,0,6), ncol=3,  nrow=3, byrow=TRUE)
+print(A)
+
+knitr::include_graphics("https://github.com/mlforsachid/MSDSQ2Data605/blob/master/Week3/HW-3/HW-3.jpg?raw=true")
+```
+
+Verify using R
+
+```{r}
+stat = eigen(A)
+print(stat$values)
+print(stat$vectors)
 ```
