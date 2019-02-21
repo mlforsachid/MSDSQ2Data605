@@ -1,0 +1,30 @@
+---
+title: "Data 605 Discussion Week-4"
+output:
+  html_document:
+    css: ./lab.css
+    highlight: pygments
+    theme: cerulean
+  pdf_document: default
+---
+
+##---------------------------------------------------------------------------
+###**Student Name :** Sachid Deshmukh
+###**Date :** 02/20/2019
+* > [GitHub Location for rmd file](https://github.com/mlforsachid/MSDSQ2Data605/blob/master/Week3/Discussion/SachidVijay.Deshmukh60.Rmd)
+
+* > [RPubs location of published file](http://rpubs.com/sachid/Data605Week4Disc)
+
+##---------------------------------------------------------------------------
+
+#### C25 [Page-340] Define the linear transformation
+
+```{r}
+library("knitr")
+```
+
+```{r}
+include_graphics('https://github.com/mlforsachid/MSDSQ2Data605/blob/master/Week3/Discussion/C19.jpg?raw=true')
+```
+ 
+ 
