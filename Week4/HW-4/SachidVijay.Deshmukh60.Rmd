@@ -1,0 +1,115 @@
+---
+title: "Data 605 Homework Week-4"
+output:
+  html_document:
+    css: ./lab.css
+    highlight: pygments
+    theme: cerulean
+  pdf_document: default
+---
+
+##---------------------------------------------------------------------------
+###**Student Name :** Sachid Deshmukh
+###**Date :** 02/24/2019
+
+* > [GitHub Location for rmd 
+file](https://github.com/mlforsachid/MSDSQ2Data605/blob/master/Week3/HW-3/SachidVijay.Deshmukh60.Rmd)
+
+* > [RPubs location of published file](http://rpubs.com/sachid/Data605Week4HW)
+
+##---------------------------------------------------------------------------
+
+### Problem set 1
+
+**1. Matrix A = **
+
+```{r}
+A <- matrix(c(1,-1,2,0,3,4), nrow=2)
+print(A)
+```
+
+**2. Matrix X = **
+
+```{r}
+X <- A %*% t(A)
+print(X)
+```
+
+**3. Matrix Y = **
+
+```{r}
+Y <-   t(A) %*% A
+print(Y)
+```
+
+
+**4. Sungular Value Decomposition of A**
+
+```{r}
+eigenX <- eigen(X)
+eigenY <- eigen(Y)
+svdA <- svd(A)
+print(svdA)
+```
+
+**5. Validate that U is same as Eigen Vector of X **
+
+```{r}
+eigenX$vectors[,1] <- eigenX$vectors[,1] * (-1)
+round(eigenX$vectors, digits=10) == round(svdA$u, digits=10)
+```
+
+**6. Validate that V is same as Eigen Vector of Y **
+
+```{r}
+eigenY$vectors[,1] <- eigenY$vectors[,1] * (-1)
+round(eigenY$vectors[,1:2], digits=10) == round(svdA$v, digits=10)
+```
+
+**7. Validate that sigma is same as Square Root of Eigen Values of X **
+
+```{r}
+round(eigenX$values, digits=10) == round(svdA$d^2, digits=10)
+```
+
+### Problem set 2
+
+**1. myinverse function definition**
+
+```{r}
+myinverse <- function(X) {
+  
+  # Get Matrix Dimension
+  n <- dim(X)[1]
+  
+  # Matrix Inversion Loop
+  Y <- matrix(0, n, n)
+  for(i in 1:n) {
+    for(j in 1:n) {
+      Y[i,j] <- (-1)^(i+j)*det(matrix(X[-i,-j], n-1))
+    }
+  }
+  
+  # Calculate Inverse
+  Z <- t(Y)/det(X)
+  
+  return(Z)
+}
+```
+
+**2. Test myinverse function**
+
+```{r}
+A <- matrix(c(5,3,7,2,8,9,3,5,7), nrow=3)
+print(A)
+
+B <- myinverse(A)
+print(B)
+```
+
+**3. Validate that A.B = Identity Matrix**
+
+```{r}
+I = round(A %*% B, digits=10)
+print(I)
+```
