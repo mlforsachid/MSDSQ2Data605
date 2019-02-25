@@ -1,0 +1,66 @@
+---
+title: "Data 605 Discussion Week-5"
+output:
+  html_document:
+    css: ./lab.css
+    highlight: pygments
+    theme: cerulean
+  pdf_document: default
+---
+
+##---------------------------------------------------------------------------
+###**Student Name :** Sachid Deshmukh
+###**Date :** 02/25/2019
+* > [GitHub Location for rmd file](https://github.com/mlforsachid/MSDSQ2Data605/blob/master/Week4/Discussion/SachidVijay.Deshmukh60.Rmd)
+
+* > [RPubs location of published file](http://rpubs.com/sachid/Data605Week5Disc)
+
+##---------------------------------------------------------------------------
+
+#### Chapter-1 Exercise-3 
+
+**In the early 1600s, Galileo was asked to explain the fact that,although the number of triples of integers from 1 to 6 with sum 9 is the same as the number of such triples with sum 10, when three dice are rolled, a 9 seemed to comeup less often than a 10-supposedly in the experience of gamblers.**
+
+**(a) Write a program to simulate the roll of three dice a large number of times and keep track of the proportion of times that the sum is 9 and the proportion of times it is 10.**
+
+**(b) Can you conclude from your simulations that the gamblers were correct?**
+
+```{r}
+sumulateDice = function(n)
+{
+  set.seed(123)
+  diceSum = list(0)
+  for(i in 0:n)
+  {
+    dice1 = sample(1:6, size=1, replace=TRUE)
+    dice2 = sample(1:6, size=1, replace=TRUE)
+    dice3 = sample(1:6, size=1, replace=TRUE)
+    sumDice = dice1 + dice2 + dice3
+    diceSum[i] = sumDice
+  }
+  return (diceSum)
+}
+
+print("Three Dice Roll for 100 times")
+diceSum = sumulateDice(100)
+
+print(paste("Proportion of 9 = ",  length(diceSum[diceSum == 9])/length(diceSum)))
+
+print(paste("Proportion of 10 = ", length(diceSum[diceSum == 10])/length(diceSum)))
+
+print("Three Dice Roll for 1000 times")
+diceSum = sumulateDice(1000)
+
+print(paste("Proportion of 9 = ",  length(diceSum[diceSum == 9])/length(diceSum)))
+
+print(paste("Proportion of 10 = ", length(diceSum[diceSum == 10])/length(diceSum)))
+
+print("Three Dice Roll for 10000 times")
+diceSum = sumulateDice(10000)
+
+print(paste("Proportion of 9 = ",  length(diceSum[diceSum == 9])/length(diceSum)))
+
+print(paste("Proportion of 10 = ", length(diceSum[diceSum == 10])/length(diceSum)))
+```
+
+**Conclusion: From the three simulations above, we can conclude that proportions of 9 and 10 are almost the same. The difference is in-significant as the no of simulations increases**
