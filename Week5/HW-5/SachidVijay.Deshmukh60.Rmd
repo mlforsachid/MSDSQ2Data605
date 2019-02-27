@@ -1,0 +1,66 @@
+---
+title: "Data 605 Homework Week-5"
+output:
+  html_document:
+    css: ./lab.css
+    highlight: pygments
+    theme: cerulean
+  pdf_document: default
+---
+
+##---------------------------------------------------------------------------
+###**Student Name :** Sachid Deshmukh
+###**Date :** 02/27/2019
+
+* > [GitHub Location for rmd 
+file](https://github.com/mlforsachid/MSDSQ2Data605/blob/master/Week4/HW-4/SachidVijay.Deshmukh60.Rmd)
+
+* > [RPubs location of published file](http://rpubs.com/sachid/Data605Week5HW)
+
+##---------------------------------------------------------------------------
+
+### Choose independently two numbers B and C at random from the interval [0, 1] with uniform density. Prove that B and C are proper probability distributions.Note that the point (B,C) is then chosen at random in the unit square.
+
+**Let's simulate B and C using uniform distribution function**
+
+```{r}
+# Take sample of 1000 random numbers from uniform distribution with min = 0 and max =1
+
+B = runif(1000, min=0, max=1 )
+C = runif(1000, min=0, max=1 )
+```
+
+**1. Find the probability that B+C < 0.5 **
+
+```{r}
+result = B + C
+print(length(result[result < 0.5])/length(result))
+```
+
+**2. Find the probability that BXC < 0.5 **
+
+```{r}
+result = B * C
+print(length(result[result < 0.5])/length(result))
+```
+
+**3. Find the probability that ABS(B-C) < 0.5 **
+
+```{r}
+result = abs(B - C)
+print(length(result[result < 0.5])/length(result))
+```
+
+**4. Find the probability that MAX(B, C) < 0.5 **
+
+```{r}
+result = pmax(B, C)
+print(length(result[result < 0.5])/length(result))
+```
+
+**5. Find the probability that MIN(B, C) < 0.5 **
+
+```{r}
+result = pmin(B, C)
+print(length(result[result < 0.5])/length(result))
+```
