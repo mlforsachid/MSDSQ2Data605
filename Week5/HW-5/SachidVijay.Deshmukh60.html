@@ -158,7 +158,7 @@ $(document).ready(function () {
 <h3><strong>Date :</strong> 02/27/2019</h3>
 <ul>
 <li><blockquote>
-<p><a href="https://github.com/mlforsachid/MSDSQ2Data605/blob/master/Week4/HW-4/SachidVijay.Deshmukh60.Rmd">GitHub Location for rmd file</a></p>
+<p><a href="https://github.com/mlforsachid/MSDSQ2Data605/blob/master/Week5/HW-5/SachidVijay.Deshmukh60.Rmd">GitHub Location for rmd file</a></p>
 </blockquote></li>
 <li><blockquote>
 <p><a href="http://rpubs.com/sachid/Data605Week5HW">RPubs location of published file</a></p>
@@ -178,23 +178,23 @@ C =<span class="st"> </span><span class="kw">runif</span>(<span class="dv">1000<
 <p><strong>1. Find the probability that B+C &lt; 0.5 </strong></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">result =<span class="st"> </span>B <span class="op">+</span><span class="st"> </span>C
 <span class="kw">print</span>(<span class="kw">length</span>(result[result <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.5</span>])<span class="op">/</span><span class="kw">length</span>(result))</code></pre></div>
-<pre><code>## [1] 0.131</code></pre>
+<pre><code>## [1] 0.12</code></pre>
 <p><strong>2. Find the probability that BXC &lt; 0.5 </strong></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">result =<span class="st"> </span>B <span class="op">*</span><span class="st"> </span>C
 <span class="kw">print</span>(<span class="kw">length</span>(result[result <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.5</span>])<span class="op">/</span><span class="kw">length</span>(result))</code></pre></div>
-<pre><code>## [1] 0.853</code></pre>
+<pre><code>## [1] 0.844</code></pre>
 <p><strong>3. Find the probability that ABS(B-C) &lt; 0.5 </strong></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">result =<span class="st"> </span><span class="kw">abs</span>(B <span class="op">-</span><span class="st"> </span>C)
 <span class="kw">print</span>(<span class="kw">length</span>(result[result <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.5</span>])<span class="op">/</span><span class="kw">length</span>(result))</code></pre></div>
-<pre><code>## [1] 0.745</code></pre>
+<pre><code>## [1] 0.741</code></pre>
 <p><strong>4. Find the probability that MAX(B, C) &lt; 0.5 </strong></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">result =<span class="st"> </span><span class="kw">pmax</span>(B, C)
 <span class="kw">print</span>(<span class="kw">length</span>(result[result <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.5</span>])<span class="op">/</span><span class="kw">length</span>(result))</code></pre></div>
-<pre><code>## [1] 0.277</code></pre>
+<pre><code>## [1] 0.231</code></pre>
 <p><strong>5. Find the probability that MIN(B, C) &lt; 0.5 </strong></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">result =<span class="st"> </span><span class="kw">pmin</span>(B, C)
 <span class="kw">print</span>(<span class="kw">length</span>(result[result <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.5</span>])<span class="op">/</span><span class="kw">length</span>(result))</code></pre></div>
-<pre><code>## [1] 0.772</code></pre>
+<pre><code>## [1] 0.749</code></pre>
 </div>
 </div>
 
