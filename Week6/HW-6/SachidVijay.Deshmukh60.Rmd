@@ -1,0 +1,188 @@
+---
+title: "Data 605 Homework Week-6"
+output:
+  html_document:
+    css: ./lab.css
+    highlight: pygments
+    theme: cerulean
+  pdf_document: default
+---
+
+##---------------------------------------------------------------------------
+###**Student Name :** Sachid Deshmukh
+###**Date :** 03/04/2019
+
+* > [GitHub Location for rmd 
+file](https://github.com/mlforsachid/MSDSQ2Data605/blob/master/Week5/HW-5/SachidVijay.Deshmukh60.Rmd)
+
+* > [RPubs location of published file](http://rpubs.com/sachid/Data605Week5HW)
+
+##---------------------------------------------------------------------------
+
+**1. A box contains 54 red marbles, 9 white marbles, and 75 blue marbles. If a marble is randomly selected from the box, what is the probability that it is red or blue? Express your answer as a fraction or a decimal number rounded to four decimal places.**
+
+Answer: There are total 138 balls out of which 129 balls are either red or blue. Probability of a ball being red or blue can be found as 
+
+129/138 = 0.9347
+
+**2. You are going to play mini golf. A ball machine that contains 19 green golf balls, 20 red golf balls, 24 blue golf balls, and 17 yellow golf balls, randomly gives you your ball. What is the probability that you end up with a red golf ball? Express your answer as a simplified fraction or a decimal rounded to four decimal places. **
+
+Answer: There are 80 balls in the golf machine out of whihc 20 are red. Probability that one end up with red ball can be found as 
+
+20/80 = 1/4 = 0.25
+
+**3. A pizza delivery company classifies its customers by gender and location of residence. The research department has gathered data from a random sample of 1399 customers. The data is summarized in the table below. **
+
+**What is the probability that a customer is not male or does not live with parents? Write your answer as a fraction or a decimal number rounded to four decimal places.**
+
+Probability of customer is not male or doesn't live with parents can be simply 1-(probability of customer is male and lives with parents)
+
+From the distribution table in the example we can see that 
+
+Probability of customer is male and lives with parents = 215/1399 = 0.1536
+
+Probability of customer is not male or doesn't live with parent = 
+
+1- 0.1536 = 0.8464
+
+**4. Determine if the following events are independent. Going to the gym. Losing weight.**
+
+Answer : If the person is going to gym it may influence the weight loss process and vice versa. These are dependent events
+
+**5. A veggie wrap at City Subs is composed of 3 different vegetables and 3 different condiments wrapped up in a tortill a. If there are 8 vegetables, 7 condiments, and 3 types of tortilla available, how many different veggie wraps can be made? **
+
+```{r}
+Veg.combi = dim(combn(8, 3))[2]
+condi.combi = dim(combn(7, 3))[2]
+tort.combi = dim(combn(3, 1))[2]
+wraps.combi = Veg.combi * condi.combi * tort.combi
+print(paste("Total different veggie wraps that can be made = ", wraps.combi))
+
+```
+
+**6. Determine if the following events are independent. Jeff runs out of gas on the way to work. Liz watches the evening news**
+
+Answer : Jeff running out of gas will no way influence Liz watching evening news. Both the event are independent
+
+**7. The newly elected president needs to decide the remaining 8 spots available in the cabinet he/she is appointing. If there are 14 eligible candidates for these positions (where rank matters), how many different ways can the members of the cabinet be appointed?**
+
+```{r}
+perm <- function(n,k){choose(n,k) * factorial(k)}
+pos.perm = (perm(14,8))
+
+print(paste("Different ways members can be appointed = ", pos.perm))
+```
+
+**8. A bag contains 9 red, 4 orange, and 9 green jellybeans. What is the probability of reaching into the bag and randomly withdrawing 4 jellybeans such that the number of red ones is 0, the number of orange ones is 1, and the number of green ones is 3? Write your answer as a fraction or a decimal number rounded to four decimal places.**
+
+```{r}
+sample.space = dim(combn(22, 4))[2]
+orange.1 = dim(combn(4,1))[2]
+green.3 = dim(combn(9,3))[2]
+prob = (orange.1 * green.3)/sample.space
+
+print(round(prob,4))
+
+```
+
+**9. Evaluate the following expression. 11!/7!**
+
+```{r}
+result = factorial(11)/factorial(7)
+print(result)
+```
+
+**10. Describe the complement of the given event. 67% of subscribers to a fitness magazine are over the age of 34. **
+
+Answer: 33% of subscribers to a fitness magazine are less than or equal to the age of 34
+
+**11. If you throw exactly three heads in four tosses of a coin you win $97. If not, you pay me $30.**
+
+**Step 1. Find the expected value of the proposition. Round your answer to two decimal places.**
+
+```{r}
+win.prob = pbinom(3, 4, 0.5) - pbinom(2, 4, 0.5)
+loss.prob = 1-win.prob
+EV = (97 * win.prob) - (30*loss.prob)
+
+print(paste("Expected value of the proposition = ", round(EV,2)))
+
+```
+
+
+**Step 2. If you played this game 559 times how much would you expect to win or lose? (Losses must be entered as negative.)**
+
+Answer : If one pay the game 559 times one can expect to win
+
+559 * 1.75 = $978.25
+
+**12. Flip a coin 9 times. If you get 4 tails or less, I will pay you $23. Otherwise you pay me $26.**
+
+**Step 1. Find the expected value of the proposition. Round your answer to two decimal places.**
+
+```{r}
+win.prob = pbinom(4, 9, 0.5) 
+loss.prob = 1-win.prob
+EV = (23 * win.prob) - (26*loss.prob)
+
+print(paste("Expected value of the proposition = ", round(EV,2)))
+```
+
+**Step 2. If you played this game 994 times how much would you expect to win or lose? (Losses must be entered as negative.)**
+
+Answer : If one pay the game 994 times one can expect to lose
+
+994 * (-1.5) = -$1491
+
+**13. The sensitivity and specificity of the polygraph has been a subject of study and debate for years. A 2001 study of the use of polygraph for screening purposes suggested that the probability of detecting a liar was .59 (sensitivity) and that the probability of detecting a "truth teller" was .90 (specificity). We estimate that about 20% of individuals selected for the screening polygraph will lie. **
+
+Answer : Suppose there are 100 individuals then
+
+Individuals to lie = 20% = 20
+Individuals to tell truth = 80% = 80
+Individuals to lie and test as positive = 0.59 * 20 = 11.8
+Individuals to lie and test as negative = 20 - 11.8 = 8.2
+Individuals to tell truth and test being negative = 0.9 * 80 = 72
+Individuals to tell truth and test positive  = 80-72 = 8
+
+```{r}
+df = data.frame(c(11.8,8.2, 20), c(8, 72, 80), c(19.8,80.2, 100))
+names(df) = c("Lie", "Truth", "Total")
+row.names(df) = c("Positive", "Negative", "Total")
+head(df)
+```
+
+
+**a. What is the probability that an individual is actually a liar given that the polygraph detected him/her as such? (Show me the table or the formulaic solution or both.)**
+
+```{r}
+
+Prob.Liar.And.Pos = 0.118
+Prob.Pos = 0.198
+
+Prob.Liar.Pos = Prob.Liar.And.Pos/Prob.Pos
+print(round(Prob.Liar.Pos,4))
+
+```
+
+**b. What is the probability that an individual is actually a truth-teller given that the polygraph detected him/her as such? (Show me the table or the formulaic solution or both.)**
+
+```{r}
+Prob.Truth.And.Neg = 0.72
+Prob.Neg = 0.802
+
+Prob.Truth.Neg = Prob.Truth.And.Neg/Prob.Neg
+print(round(Prob.Truth.Neg,4))
+```
+
+**c. What is the probability that a randomly selected individual is either a liar or was identified as a liar by the polygraph? Be sure to write the probability statement.**
+
+```{r}
+Prob.Lier = 0.2
+Prob.Pos = 0.198
+Prob.Lier.And.Pos = 0.118
+Prob.Lier.Or.Pos = Prob.Lier + Prob.Pos - Prob.Lier.And.Pos
+print(Prob.Lier.Or.Pos)
+
+
+```
