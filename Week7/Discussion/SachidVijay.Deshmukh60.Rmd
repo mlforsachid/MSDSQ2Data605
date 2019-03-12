@@ -24,7 +24,7 @@ library("knitr")
 ```
 
 ```{r}
-include_graphics('https://github.com/mlforsachid/MSDSQ2Data605/blob/master/Week7/Discussion/Week-7_Discussion.jpeg?raw=true')
+include_graphics('https://github.com/mlforsachid/MSDSQ2Data605/blob/master/Week7/Discussion/Week7_Discussion.jpeg?raw=true')
 ```
  
  
