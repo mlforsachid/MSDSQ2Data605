@@ -1,0 +1,81 @@
+---
+title: "Data 605 Homework Week-7"
+output:
+  html_document:
+    css: ./lab.css
+    highlight: pygments
+    theme: cerulean
+  pdf_document: default
+---
+
+##---------------------------------------------------------------------------
+###**Student Name :** Sachid Deshmukh
+###**Date :** 03/14/2019
+
+* > [GitHub Location for rmd 
+file](https://github.com/mlforsachid/MSDSQ2Data605/blob/master/Week6/HW-6/SachidVijay.Deshmukh60.Rmd)
+
+* > [RPubs location of published file](http://rpubs.com/sachid/Data605Week6HW)
+
+##---------------------------------------------------------------------------
+
+**1. Let X1,X2,...,Xn be n mutually independent random variables, each of which is uniformly distributed on the integers from 1 to k. Let Y denote the minimum of the Xi's. Find the distribution of Y.**
+
+```{r}
+sim.uni <- function(a,b) {
+  Y = c()
+  for (i in 1:b){
+    X <- runif(a)
+    Y[i] = min(X)
+  }
+  return(Y)
+}
+
+Y <- sim.uni(10, 100)
+
+hist(Y,  breaks = 20)
+```
+
+**2. Your organization owns a copier (future lawyers, etc.) or MRI (future doctors). This machine has a manufacturer's expected lifetime of 10 years. This means that we expect one failure every ten years. (Include the probability statements and R Code for each part.).**
+
+**a) What is the probability that the machine will fail after 8 years?. Provide also the expected value and standard deviation. Model as a geometric. (Hint: the probability is equivalent to not failing during the first 8 years..)**
+
+```{r}
+p=0.1
+pgeom(8, p, lower.tail = FALSE)
+mean = 1/p
+sd = sqrt(((1-p)/p^2))
+print(mean)
+print(sd)
+```
+
+**b) What is the probability that the machine will fail after 8 years?. Provide also the expected value and standard deviation. Model as an exponential.**
+
+```{r}
+pexp(8, p, lower.tail = FALSE)
+mean = p^-1
+sd = sqrt(p^-2)
+print(mean)
+print(sd)
+```
+
+**c) What is the probability that the machine will fail after 8 years?. Provide also the expected value and standard deviation. Model as a binomial. (Hint: 0 success in 8 years)**
+
+```{r}
+pbinom(0, 8, 0.1)
+mean = 10* 0.1
+sd = sqrt(10*p*(1-p))
+print(mean)
+print(sd)
+```
+
+**d)What is the probability that the machine will fail after 8 years?. Provide also the expected value and standard deviation. Model as a Poisson. **
+
+```{r}
+ppois(0, 8/10)
+mean = .1
+sd = sqrt(mean)
+print(mean)
+print(sd)
+
+```
