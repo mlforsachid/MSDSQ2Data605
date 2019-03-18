@@ -1,0 +1,46 @@
+---
+title: "Data 605 Discussion Week-8"
+output:
+  html_document:
+    css: ./lab.css
+    highlight: pygments
+    theme: cerulean
+  pdf_document: default
+---
+
+##---------------------------------------------------------------------------
+###**Student Name :** Sachid Deshmukh
+###**Date :** 03/18/2019
+* > [GitHub Location for rmd file](https://github.com/mlforsachid/MSDSQ2Data605/blob/master/Week7/Discussion/SachidVijay.Deshmukh60.Rmd)
+
+* > [RPubs location of published file](http://rpubs.com/sachid/Data605Week7Disc)
+
+##---------------------------------------------------------------------------
+
+#### Chapter-7 Exercise-1
+
+**A die is rolled three times. Find the probability that the sum of the outcomes is**
+**(a) greater than 9.**
+**(b) an odd number.**
+
+**1] Simulate three dice role 1000 times and find the sum**
+
+```{r}
+time = 1000
+sum.dice <- sample(1:6, size = time, replace = TRUE) + sample(1:6, size = time, replace = TRUE) + sample(1:6, size = time, replace = TRUE)
+```
+
+**(a) Find probability of sum greater than 9.**
+```{r}
+p.num.gt.9 = length(sum.dice[sum.dice>9])/length(sum.dice)
+
+print(p.num.gt.9)
+```
+
+**(a) Find probability of sum being an odd number.**
+```{r}
+p.odd = length(sum.dice[sum.dice %% 2 != 0])/length(sum.dice)
+print(p.odd)
+```
+ 
+ 
