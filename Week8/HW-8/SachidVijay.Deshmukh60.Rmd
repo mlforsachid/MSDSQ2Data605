@@ -13,9 +13,9 @@ output:
 ###**Date :** 03/19/2019
 
 * > [GitHub Location for rmd 
-file](https://github.com/mlforsachid/MSDSQ2Data605/blob/master/Week7/HW-7/SachidVijay.Deshmukh60.Rmd)
+file](https://github.com/mlforsachid/MSDSQ2Data605/blob/master/Week8/HW-8/SachidVijay.Deshmukh60.Rmd)
 
-* > [RPubs location of published file](http://rpubs.com/sachid/Data605Week7HW)
+* > [RPubs location of published file](http://rpubs.com/sachid/Data605Week8HW)
 
 ##---------------------------------------------------------------------------
 
