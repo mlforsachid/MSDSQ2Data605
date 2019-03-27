@@ -1,0 +1,122 @@
+---
+title: "Data 605 Homework Week-8"
+output:
+  html_document:
+    css: ./lab.css
+    highlight: pygments
+    theme: cerulean
+  pdf_document: default
+---
+
+##---------------------------------------------------------------------------
+###**Student Name :** Sachid Deshmukh
+###**Date :** 03/19/2019
+
+* > [GitHub Location for rmd 
+file](https://github.com/mlforsachid/MSDSQ2Data605/blob/master/Week8/HW-8/SachidVijay.Deshmukh60.Rmd)
+
+* > [RPubs location of published file](http://rpubs.com/sachid/Data605Week8HW)
+
+##---------------------------------------------------------------------------
+
+### Chapter 7 Exercise 11
+
+**A company buys 100 lightbulbs, each of which has an exponential lifetime of 1000 hours. What is the expected time for the first of these bulbs to burn out?**
+
+```{r}
+sim.light = function(size=100, mean=1000, time=1000)
+{
+  min.light = c()
+  for(i in 1:time)
+  {
+    exp = rexp(size,1/mean)
+    min.light[i] = min(exp)
+  }
+  return (mean(min.light))
+}
+
+print(paste("Expected time for the first of these bulbs to burn out = ", sim.light()))
+```
+
+### Chapter 7 Exercise 14
+
+**Assume that X1 and X2 are independent random variables, each having an exponential density with parameter lambda. Show that Z=X1-X2 has density fZ(z)=(1/2)e(-lambda X Z).**
+
+```{r}
+sim.exp = function(size=1000, lambda=5)
+{
+  num = runif(size, min = -7, max = 10)
+  pos.num = num[num>=0]
+  neg.num = num[num < 0]
+  pos.num.den = lambda * (exp(-lambda*pos.num))
+  neg.num.den = rep(0, length(neg.num))
+  tot.den = append(pos.num.den,neg.num.den)
+  return(tot.den)
+}
+
+sim.diff.exp = function(size=1000, lambda=5)
+{
+  num = runif(size, min = -7, max = 10)
+  pos.num = num[num>=0]
+  neg.num = num[num < 0]
+  pos.num.den = 0.5 * (exp(-lambda*pos.num))
+  neg.num.den = rep(0, length(neg.num))
+  tot.den = append(pos.num.den,neg.num.den)
+  return(tot.den)
+}
+```
+**1. Simulate exponential distribution with some value of lambda (here it is 5)**
+
+```{r}
+X1 = sim.exp()
+X2 = sim.exp()
+```
+
+**2. Calculate distribution of X1 - X2**
+
+```{r}
+Z = ifelse(X1 - X2 <0,0, X1-X2)
+```
+
+**3. Plot the distribution density function for X1-X2**
+
+```{r}
+hist (Z, breaks=100, probability = 1)
+```
+
+**4. Simulate the distribution density function of fZ(z)=(1/2)e(-lambda X Z) .**
+
+```{r}
+diff = sim.diff.exp()
+```
+
+**5. Plot the distribution density function for fZ(z)=(1/2)e(-lambda X Z) .**
+
+```{r}
+hist(diff,breaks=100, probability = 1)
+```
+
+**The distribution function plot of X1-X2 is similar to distribution function plot for fZ(z)=(1/2)e(-lambda X Z) . This proves that Z=X1-X2  has density fZ(z)=(1/2)e(-lambda X Z).**
+
+### Chapter 8 Exercise 1
+
+**Let X be a continuous random variable with mean=10 and variance =100/3. Using Chebyshev's Inequality, find an upper bound for the following probabilities.**
+
+**a. P(abs(X-10)>= 2)**
+**b. P(abs(X-10)>= 5)**
+**c. P(abs(X-10)>= 9)**
+**d. P(abs(X-10)>= 20)**
+
+```{r}
+cheb.prob = function(mean = 10, var=100/3, k)
+{
+  prob = ifelse((var/k^2) > 1, 1,var/k^2)
+  return(prob)
+}
+
+print(paste("P(abs(X-10)>= 2) = ",cheb.prob(k=2)))
+print(paste("P(abs(X-10)>= 5) = ",cheb.prob(k=5)))
+print(paste("P(abs(X-10)>= 9) = ",cheb.prob(k=9)))
+print(paste("P(abs(X-10)>= 20) = ",cheb.prob(k=20)))
+```
+
