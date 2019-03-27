@@ -13,7 +13,7 @@ output:
 ###**Date :** 04/02/2019
 
 * > [GitHub Location for rmd 
-file](https://github.com/mlforsachid/MSDSQ2Data605/blob/master/Week9/HW-9/SachidVijay.Deshmukh60.Rmd)
+file](https://github.com/mlforsachid/MSDSQ2Data605/blob/master/Week10/HW-10/SachidVijay.Deshmukh60.Rmd)
 
 * > [RPubs location of published file](http://rpubs.com/sachid/Data605Week10HW)
 
@@ -36,4 +36,4 @@ print(dbinom(3,3,0.4))
 
 **(c) Which strategy gives Smith the better chance of getting out of jail?**
 
-Bold strategy with probability of 0.064 guves Smith the better chance if getting out of jail
+Bold strategy with probability of 0.064 gives Smith better chance if getting out of jail
