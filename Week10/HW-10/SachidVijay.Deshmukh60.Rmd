@@ -1,0 +1,39 @@
+---
+title: "Data 605 Homework Week-10"
+output:
+  html_document:
+    css: ./lab.css
+    highlight: pygments
+    theme: cerulean
+  pdf_document: default
+---
+
+##---------------------------------------------------------------------------
+###**Student Name :** Sachid Deshmukh
+###**Date :** 04/02/2019
+
+* > [GitHub Location for rmd 
+file](https://github.com/mlforsachid/MSDSQ2Data605/blob/master/Week9/HW-9/SachidVijay.Deshmukh60.Rmd)
+
+* > [RPubs location of published file](http://rpubs.com/sachid/Data605Week10HW)
+
+##---------------------------------------------------------------------------
+
+**Smith is in jail and has 1 dollar; he can get out on bail if he has 8 dollars. A guard agrees to make a series of bets with him. If Smith bets A dollars, he wins A dollars with probability .4 and loses A dollars with probability .6. Find the probability that he wins 8 dollars before losing all of his money if**
+
+**(a) he bets 1 dollar each time (timid strategy).**
+
+```{r}
+print((1.5^1-1)/(1.5^8-1))
+
+```
+**(b) he bets, each time, as much as possible but not more than necessary to bring his fortune up to 8 dollars (bold strategy).**
+
+```{r}
+print(dbinom(3,3,0.4))
+
+```
+
+**(c) Which strategy gives Smith the better chance of getting out of jail?**
+
+Bold strategy with probability of 0.064 guves Smith the better chance if getting out of jail
