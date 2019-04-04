@@ -1,0 +1,128 @@
+---
+title: "Data 605 Homework Week-11"
+output:
+  html_document:
+    css: ./lab.css
+    highlight: pygments
+    theme: cerulean
+  pdf_document: default
+---
+
+##---------------------------------------------------------------------------
+###**Student Name :** Sachid Deshmukh
+###**Date :** 04/02/2019
+
+* > [GitHub Location for rmd 
+file](https://github.com/mlforsachid/MSDSQ2Data605/blob/master/Week10/HW-10/SachidVijay.Deshmukh60.Rmd)
+
+* > [RPubs location of published file](http://rpubs.com/sachid/Data605Week10HW)
+
+##---------------------------------------------------------------------------
+
+### One Factor Regression
+
+**In this exercise we will fit a simple linear regression model which will fit car stopping distance as a function of speed. We will use built in car dataset in R for this exercise**
+
+**Let's preview the car data set**
+
+```{r}
+head(cars)
+```
+
+**As we can see there are two columns in this data set. speed indicates a car speed and distance which indicates a car stopping distance**
+
+### Data Visualization
+
+
+### Univariate Analysis
+
+**First find out the data distribution of speed and distance variables**
+
+```{r}
+hist(cars$speed)
+hist(cars$dist)
+```
+
+**From the above histograms we can see that both speed and distance variables are normally distributed**
+
+**Find out the outliers in speed and distance variables**
+
+```{r}
+boxplot(cars$speed)
+boxplot(cars$dist)
+```
+
+**From the above box plots we can see that speed is uniformly distributed without much skew and there are no outliers detected in speed variable.**
+
+**Distance variable indicates right skewed data with one potential outlier**
+
+**Outlier is a point with stopping distance of 120 for speed 24. Let's replace this outlier with avg stopping distance for speed 24**
+
+```{r}
+cars[cars$dist == max(cars$dist), 'dist'] = mean(cars[cars$speed == 24 & cars$dist != max(cars$dist),'dist'])
+```
+
+### Bivariate Analysis
+
+**Let's see the corrlation between Speed and Distance. Let's plot a scatter plot**
+
+```{r}
+plot(cars$dist ~ cars$speed)
+abline(lm(cars$dist ~ cars$speed))
+```
+
+**From the above scatter plot we can see that Distance and Speed are positively correlated. The relationship appears to be somewhat linear even though not perfectly linear**
+
+### Model Fitting
+
+**Let's fit the linear model between speed and distance**
+
+```{r}
+lm.cars.fit = lm(dist~speed, data=cars)
+```
+
+### Model summary analysis
+
+**Let's analize model summary**
+
+```{r}
+summary(lm.cars.fit)
+```
+
+**Let's analyze each component one by one**
+
+**1] Residuals - For a Linear regression model with good fit, we expect Residuals to be normally distributed with mean around 0. From the residuls of this model, we can see that Median is close to 0 which is good. First and Third qunatiles of residuals are in the same range which indicates residuals are evenly spread. The Min and Max range of the residuals is also evenly spread.**
+
+**2] Coefficients - We can see that above model has Intercept as -17.57 and slope as 3.93. With this we can write the linear function between speed and distance as distance = -17.57 + 3.93 X speed. We can conclude that for each one unit increase in speed, car stopping distance is increased by 3.93 units**
+
+**P Values of Intercept and Speed variables are statestically significant. This indicates that both are useful while fitting the model.**
+
+**The Standard error for Intercept and speed variable is small. This indicates that there is less variability in the coefficient estimation of Intercept and speed variable**
+
+**3] Residual Standard Error - This indicates measure of total variation in the residual values. Above model has residual standard error of 15.38**
+
+**4] Multiple R Squared - Multiple R Squared indicates model fit using all the variables. Above model have multiple R squared as 0.65**
+
+**5] Adjusted R Suqare - Adjusted R Square indicates model fit without using any variables. Above model has adjusted R square of 0.64. Multiple R square is higher that adjusted R suqare. This indicates Speed variable is useful on overall model fit**
+
+**6] F Statistics - F Statistics indicates importance of the feature used in the model cumulatively. Since in our case we have just one feature (speed), we can ignore this statistics.**
+
+### Residual Analysis
+
+```{r}
+plot(lm.cars.fit$residuals)
+qqnorm(resid(lm.cars.fit))
+qqline(resid(lm.cars.fit))
+```
+
+** Let's focus more on Residual Analysis**
+
+**1] Homoscadasticity - From the residual plot above, we can see that residuals are increasing as speed increases. We expect residuls without any pattern as a shapeless cloud. Here we can see that residuals are not homoscadastic**
+
+**2] Y axis Imbalance - Residulas should be balance on Y axis equally centered around 0. From the above plot we can see that residuals are Y axis imbalance**
+
+**3] Nonlinear Pattern - We can see that residuals show little non linear pattern. This indicates that there is not strict linear relationship between speed and distance**
+
+**4] Normal Distribution - From the quantile density plot above we can see that residuals are not normally distributed**
+
+**All above factors indicates speed alone is not a very good predictor of stopping distance. We will have to add more features to increase goodness of fit for our model**
