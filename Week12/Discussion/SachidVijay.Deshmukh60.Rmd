@@ -11,13 +11,11 @@ output:
 ##---------------------------------------------------------------------------
 ###**Student Name :** Sachid Deshmukh
 ###**Date :** 04/18/2019
-* > [GitHub Location for rmd file](https://github.com/mlforsachid/MSDSQ2Data605/blob/master/Week8/Discussion/SachidVijay.Deshmukh60.Rmd)
+* > [GitHub Location for rmd file](https://github.com/mlforsachid/MSDSQ2Data605/blob/master/Week12/Discussion/SachidVijay.Deshmukh60.Rmd)
 
-* > [RPubs location of published file](http://rpubs.com/sachid/Data605Week8Disc)
+* > [RPubs location of published file](http://rpubs.com/sachid/Data605Week12Disc)
 
 ##---------------------------------------------------------------------------
-
-#### Chapter-7 Exercise-1
 
 **In this example we will use built in cars dataset to build multiple regression model**
 
