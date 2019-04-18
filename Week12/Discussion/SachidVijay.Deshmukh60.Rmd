@@ -1,0 +1,71 @@
+---
+title: "Data 605 Discussion Week-12"
+output:
+  html_document:
+    css: ./lab.css
+    highlight: pygments
+    theme: cerulean
+  pdf_document: default
+---
+
+##---------------------------------------------------------------------------
+###**Student Name :** Sachid Deshmukh
+###**Date :** 04/18/2019
+* > [GitHub Location for rmd file](https://github.com/mlforsachid/MSDSQ2Data605/blob/master/Week8/Discussion/SachidVijay.Deshmukh60.Rmd)
+
+* > [RPubs location of published file](http://rpubs.com/sachid/Data605Week8Disc)
+
+##---------------------------------------------------------------------------
+
+#### Chapter-7 Exercise-1
+
+**In this example we will use built in cars dataset to build multiple regression model**
+
+**Aim is to predict car mileage using car displacement, horsepower, drat and weight**
+
+
+**1] Data Analysis **
+
+```{r}
+head(mtcars)
+str(mtcars)
+attach(mtcars)
+```
+
+**2] Build Model**
+
+```{r}
+model <- mpg~disp + hp + drat + wt
+fit <- lm(model, mtcars)
+fit
+
+```
+
+**3] Model Summary.**
+```{r}
+summary(fit)
+```
+ 
+ **From the model summary we can conclude that**
+ 
+ **1. Horsepower and Weight are the strong predictor of mileage**
+ 
+ **2. Displacement and drat are not helping in predicting car mileage**
+ 
+ **3. Negative coefficient for horsepower and weight indicates that mileage increases as weight and horsepower decreases and vice versa**
+ 
+**Residual Analysis**
+
+```{r}
+plot(fit$residuals)
+```
+
+**Residuals are y axis imbalance indicating some outliers in the data**
+
+**Residuals show some non-linear pattern indicating relationship of mileage and predictor variables is not strictly linear**
+
+```{r}
+qqnorm(fit$residuals)
+```
+
+**Residuals are not normally distributed indicating weight and horsepower are not the only predictor for mileage. We need to add some more predictor for good fit of the model**
