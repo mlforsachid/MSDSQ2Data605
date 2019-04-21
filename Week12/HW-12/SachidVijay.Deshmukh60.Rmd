@@ -13,9 +13,9 @@ output:
 ###**Date :** 04/21/2019
 
 * > [GitHub Location for rmd 
-file](https://github.com/mlforsachid/MSDSQ2Data605/blob/master/Week10/HW-10/SachidVijay.Deshmukh60.Rmd)
+file](https://github.com/mlforsachid/MSDSQ2Data605/blob/master/Week12/HW-12/SachidVijay.Deshmukh60.Rmd)
 
-* > [RPubs location of published file](http://rpubs.com/sachid/Data605Week10HW)
+* > [RPubs location of published file](http://rpubs.com/sachid/Data605Week12HW)
 
 ##---------------------------------------------------------------------------
 
@@ -24,7 +24,7 @@ file](https://github.com/mlforsachid/MSDSQ2Data605/blob/master/Week10/HW-10/Sach
 **Load Life Expectancy Data**
 
 ```{r}
-life.exp.df = read.csv("D:/MSDS/MSDSQ2Data605/Week12/HW-12/who.csv")
+life.exp.df = read.csv("https://raw.githubusercontent.com/mlforsachid/MSDSQ2Data605/master/Week12/HW-12/who.csv")
 head(life.exp.df)
 str(life.exp.df)
 ```
@@ -69,7 +69,7 @@ print(life.exp.pred)
 **Build the following multiple regression model and interpret the F Statistics, R^2, standard error, and p-values. How good is the model? LifeExp = b0+b1 x PropMd + b2 x TotExp +b3 x PropMD x TotExp**
 
 ```{r}
-life.exp.df = read.csv("D:/MSDS/MSDSQ2Data605/Week12/HW-12/who.csv")
+life.exp.df = read.csv("https://raw.githubusercontent.com/mlforsachid/MSDSQ2Data605/master/Week12/HW-12/who.csv")
 life.exp.df$IntTerm = life.exp.df$PropMD * life.exp.df$TotExp
 fit = lm(LifeExp~PropMD+TotExp+IntTerm, data=life.exp.df)
 summary(fit)

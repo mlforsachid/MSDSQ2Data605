@@ -154,14 +154,14 @@ $(document).ready(function () {
 <div id="student-name-sachid-deshmukh" class="section level3">
 <h3><strong>Student Name :</strong> Sachid Deshmukh</h3>
 </div>
-<div id="date-04182019" class="section level3">
-<h3><strong>Date :</strong> 04/18/2019</h3>
+<div id="date-04212019" class="section level3">
+<h3><strong>Date :</strong> 04/21/2019</h3>
 <ul>
 <li><blockquote>
-<p><a href="https://github.com/mlforsachid/MSDSQ2Data605/blob/master/Week10/HW-10/SachidVijay.Deshmukh60.Rmd">GitHub Location for rmd file</a></p>
+<p><a href="https://github.com/mlforsachid/MSDSQ2Data605/blob/master/Week12/HW-12/SachidVijay.Deshmukh60.Rmd">GitHub Location for rmd file</a></p>
 </blockquote></li>
 <li><blockquote>
-<p><a href="http://rpubs.com/sachid/Data605Week10HW">RPubs location of published file</a></p>
+<p><a href="http://rpubs.com/sachid/Data605Week12HW">RPubs location of published file</a></p>
 </blockquote></li>
 </ul>
 </div>
@@ -170,9 +170,8 @@ $(document).ready(function () {
 <h2>—————————————————————————</h2>
 <div id="multiple-linear-regression" class="section level3">
 <h3>Multiple Linear Regression</h3>
-<p><strong>In this exercise we will fit a simple linear regression model which will fit car stopping distance as a function of speed. We will use built in car dataset in R for this exercise</strong></p>
 <p><strong>Load Life Expectancy Data</strong></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">life.exp.df =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;D:/MSDS/MSDSQ2Data605/Week12/HW-12/who.csv&quot;</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">life.exp.df =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/mlforsachid/MSDSQ2Data605/master/Week12/HW-12/who.csv&quot;</span>)
 <span class="kw">head</span>(life.exp.df)</code></pre></div>
 <pre><code>##               Country LifeExp InfantSurvival Under5Survival  TBFree
 ## 1         Afghanistan      42          0.835          0.743 0.99769
@@ -259,7 +258,7 @@ life.exp.pred =<span class="st"> </span>life.exp.pred <span class="op">^</span><
 <pre><code>##        1        2 
 ## 63.31153 86.50645</code></pre>
 <p><strong>Build the following multiple regression model and interpret the F Statistics, R^2, standard error, and p-values. How good is the model? LifeExp = b0+b1 x PropMd + b2 x TotExp +b3 x PropMD x TotExp</strong></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">life.exp.df =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;D:/MSDS/MSDSQ2Data605/Week12/HW-12/who.csv&quot;</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">life.exp.df =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/mlforsachid/MSDSQ2Data605/master/Week12/HW-12/who.csv&quot;</span>)
 life.exp.df<span class="op">$</span>IntTerm =<span class="st"> </span>life.exp.df<span class="op">$</span>PropMD <span class="op">*</span><span class="st"> </span>life.exp.df<span class="op">$</span>TotExp
 fit =<span class="st"> </span><span class="kw">lm</span>(LifeExp<span class="op">~</span>PropMD<span class="op">+</span>TotExp<span class="op">+</span>IntTerm, <span class="dt">data=</span>life.exp.df)
 <span class="kw">summary</span>(fit)</code></pre></div>
@@ -283,7 +282,7 @@ fit =<span class="st"> </span><span class="kw">lm</span>(LifeExp<span class="op"
 ## Residual standard error: 8.765 on 186 degrees of freedom
 ## Multiple R-squared:  0.3574, Adjusted R-squared:  0.3471 
 ## F-statistic: 34.49 on 3 and 186 DF,  p-value: &lt; 2.2e-16</code></pre>
-<p>** From the above model summary we can conclude following**</p>
+<p><strong>From the above model summary we can conclude following</strong></p>
 <p><strong>1. Residuals are not evenly distributed</strong></p>
 <p><strong>2. P values of all the regression coefficients are significant. This indicates that all the predictor variables are helping in predicting life expectancy</strong></p>
 <p><strong>3. Make a note of interaction term added to model ProdMD X TotExp. P value of the interaction term is significant indicating it is helpful in predicting life exp</strong></p>
