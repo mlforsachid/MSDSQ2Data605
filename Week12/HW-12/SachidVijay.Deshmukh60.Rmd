@@ -1,0 +1,106 @@
+---
+title: "Data 605 Homework Week-12"
+output:
+  html_document:
+    css: ./lab.css
+    highlight: pygments
+    theme: cerulean
+  pdf_document: default
+---
+
+##---------------------------------------------------------------------------
+###**Student Name :** Sachid Deshmukh
+###**Date :** 04/21/2019
+
+* > [GitHub Location for rmd 
+file](https://github.com/mlforsachid/MSDSQ2Data605/blob/master/Week10/HW-10/SachidVijay.Deshmukh60.Rmd)
+
+* > [RPubs location of published file](http://rpubs.com/sachid/Data605Week10HW)
+
+##---------------------------------------------------------------------------
+
+### Multiple Linear Regression
+
+**Load Life Expectancy Data**
+
+```{r}
+life.exp.df = read.csv("D:/MSDS/MSDSQ2Data605/Week12/HW-12/who.csv")
+head(life.exp.df)
+str(life.exp.df)
+```
+
+**1. Provide a scatterplot of LifeExp~TotExp, and run simple linear regression. Do not transform the variables. Provide and interpret the F statistics, R^2, standard error,and p-values only. Discuss whether the assumptions of simple linear regression met.**
+
+```{r}
+plot(life.exp.df$LifeExp, life.exp.df$TotExp)
+```
+
+```{r}
+fit = lm(LifeExp~TotExp, data=life.exp.df)
+summary(fit)
+```
+**From the model summary above we can see that residuals are un-evenly distributed. We get R square as 0.25 indiciating poor fit of the model. From the coefficient standard errors it looks like there is not much variability in the coefficient estimation. P values for both hintercept and TotExp variables are significant indicating they are helping in predicting life expectancy variable**
+
+
+**2. Raise life expectancy to the 4.6 power (i.e., LifeExp^4.6). Raise total expenditures to the 0.06 power (nearly a log transform, TotExp^.06). Plot LifeExp^4.6 as a function of TotExp^.06, and r re-run the simple regression model using the transformed variables. Provide and interpret the F statistics, R^2, standard error, and p-values. Which model is "better?"**
+
+```{r}
+life.exp.df$LifeExp = life.exp.df$LifeExp^4.6
+life.exp.df$TotExp = life.exp.df$TotExp^.06
+plot(life.exp.df$LifeExp, life.exp.df$TotExp)
+fit = lm(LifeExp~TotExp, data=life.exp.df)
+summary(fit)
+```
+
+**After transforming the variable we can see that Residuals are evenly distributed. P value estimation is lot better. R Square is increased from 0.25 to 0.72 and F stats is also increased. Certainly model with trnasformed variables is better than the earlier model**
+
+
+**3. Using the results from 3, forecast life expectancy when TotExp^.06 =1.5. Then forecast life expectancy when TotExp^.06=2.5**
+
+```{r}
+TotExp = c(1.5, 2.5)
+test.df = data.frame(TotExp)
+life.exp.pred = predict.lm(fit, newdata =test.df)
+life.exp.pred = life.exp.pred ^ (1/4.6)
+print(life.exp.pred)
+
+```
+
+**Build the following multiple regression model and interpret the F Statistics, R^2, standard error, and p-values. How good is the model? LifeExp = b0+b1 x PropMd + b2 x TotExp +b3 x PropMD x TotExp**
+
+```{r}
+life.exp.df = read.csv("D:/MSDS/MSDSQ2Data605/Week12/HW-12/who.csv")
+life.exp.df$IntTerm = life.exp.df$PropMD * life.exp.df$TotExp
+fit = lm(LifeExp~PropMD+TotExp+IntTerm, data=life.exp.df)
+summary(fit)
+```
+
+**From the above model summary we can conclude following**
+
+**1. Residuals are not evenly distributed**
+
+**2. P values of all the regression coefficients are significant. This indicates that all the predictor variables are helping in predicting life expectancy**
+
+**3. Make a note of interaction term added to model ProdMD X TotExp. P value of the interaction term is significant indicating it is helpful in predicting life exp**
+
+**4. F statistics is statistically significant. This indicates that one or more variables are statistically significant while poredicting outcome variable (life exp)**
+
+**5. Multiple R Sqaure and Adjusted R square of the model is 0.35 and 0.34 respectively indiciating poor fit of the model**
+
+**Based on R suqare which indicates lack of model fit we can conculde that simple linear regression model with transformed variables is much better that multiple linear regression model**
+
+
+**5. Forecast LifeExp when PropMD=.03 and TotExp = 14. Does this forecast seem realistic? Why or why not?**
+
+
+```{r}
+PropMD = c(.03)
+TotExp = c(14)
+IntTerm = PropMD*TotExp
+test.df = data.frame(PropMD, TotExp, IntTerm)
+life.exp.pred = predict.lm(fit, newdata =test.df)
+print(life.exp.pred)
+
+```
+
+**This forecast doesn't seem realstic. There is very less likelihood of having life expectancy beyond 100 for a given person**
