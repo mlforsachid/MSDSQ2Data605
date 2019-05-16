@@ -13,7 +13,7 @@ output:
 ###**Date :** 05/14/2019
 
 * > [GitHub Location for rmd 
-file](https://github.com/mlforsachid/MSDSQ2Data605/blob/master/Week-15/HW-15/SachidVijay.Deshmukh60.Rmd)
+file](https://github.com/mlforsachid/MSDSQ2Data605/blob/master/Week15/HW-15/SachidVijay.Deshmukh60.Rmd)
 
 * > [RPubs location of published file](http://rpubs.com/sachid/Data605Week15HW)
 
