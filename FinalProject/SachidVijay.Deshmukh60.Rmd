@@ -1,0 +1,253 @@
+---
+title: "Data 605 Final Project"
+output:
+  html_document:
+    css: ./lab.css
+    highlight: pygments
+    theme: cerulean
+  pdf_document: default
+---
+
+##---------------------------------------------------------------------------
+###**Student Name :** Sachid Deshmukh
+###**Date :** 05/25/2019
+
+* > [GitHub Location for rmd 
+file](https://github.com/mlforsachid/MSDSQ2Data605/blob/master/FinalProject/SachidVijay.Deshmukh60.Rmd)
+
+* > [RPubs location of published file](http://rpubs.com/sachid/Data605FinalProject)
+
+##---------------------------------------------------------------------------
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+options(scipen=16)
+```
+
+Load the libraries
+```{r}
+library(readr)
+library(tidyverse)
+library(pracma)
+library(MASS)
+```
+
+## Problem 1.
+
+```{r}
+set.seed(123)
+X <- runif(10000, min = 1, max = 8)
+Y <- rnorm(10000 , (8+1)/2)
+```
+#### a.   P(X>x | X>y)
+
+```{r}
+x <- median(X)
+y <- summary(Y)[2][[1]]
+sum(X>x & X > y)/sum(X>y)
+```
+#### b.  P(X>x, Y>y)
+
+```{r}
+sum(X>x & Y>y)/length(X)
+```
+
+#### c.  P(X<x | X>y)
+
+```{r}
+sum(X<x & X > y)/sum(X>y)
+```
+
+
+### Investigate whether P(X>x and Y>y)=P(X>x)P(Y>y) by building a table
+
+```{r}
+tabl <- c(sum(X<x & Y < y),
+       sum(X < x & Y == y),
+       sum(X < x & Y > y))
+tabl <- rbind(tabl,
+              c(sum(X==x & Y < y),
+       sum(X == x & Y == y),
+       sum(X == x & Y > y))
+             
+             )
+tabl <- rbind(tabl,
+              c(sum(X>x & Y < y),
+       sum(X > x & Y == y),
+       sum(X > x & Y > y))
+             )
+tabl <- cbind(tabl, tabl[,1] + tabl[,2] + tabl[,3])
+tabl <- rbind(tabl, tabl[1,] + tabl[2,] + tabl[3,])
+colnames(tabl) <- c("Y<y", "Y=y", "Y>y", "Total")
+rownames(tabl) <- c("X<x", "X=x", "X>x", "Total")
+knitr::kable(tabl)
+```
+
+```{r}
+3754/10000
+((5000)/10000)*(7500/10000)
+```
+
+From above we can say that P(X>x and Y>y)=P(X>x)P(Y>y) 
+
+### Check to see if independence holds by using Fisher’s Exact Test and the Chi Square Test.
+
+```{r}
+fisher.test(table(X>x,Y>y))
+
+```
+The p-value is greater than zero indicates events are independent.
+
+The Chi Square Test
+
+```{r}
+chisq.test(table(X>x,Y>y))
+```
+The p-value is greeter than zero indicates events are independent.
+
+## Problem 2
+
+1] Read the data
+
+```{r}
+train <- read.csv("train.csv")
+test <- read.csv("test.csv")
+```
+### Descriptive and Inferential Statistics.
+
+```{r}
+hist(train$SalePrice, main="Distribution of SalePrice",xlab="Sales Price")
+```
+
+Sales Price is normally distributed with right skewed.
+
+```{r}
+barplot(table(train$SaleCondition), main="Sale Condition")
+```
+
+Most of the houses being sold are of normal Sale condition
+
+
+#### Scatterplot matrix for "SalePrice","LotArea","TotalBsmtSF"
+```{r}
+pairs(train[,c("SalePrice","LotArea","TotalBsmtSF")])
+```
+
+From the scatter plot we can see that LotArea and Total Basement sft are positively correlated with Sale Price.
+
+#### Correlation matrix for any three quantitative variables
+
+```{r}
+cormat <- cor(train[,c("SalePrice","LotArea","TotalBsmtSF")])
+cormat
+```
+SalePrice is positively correlated with LotArea and TotalBsmTSF.
+
+Test the hypotheses that the correlations between each pairwise set of variables is 0 and provide an 80% confidence interval.  
+SalePrice vs LotArea
+
+Null Hypothesis: There is no correlation between LotArea and SalePrice
+Alternative Hypothesis: There exists correlation between LotArea and SalePrice
+
+```{r}
+cor.test(train$SalePrice, train$LotArea, conf.level = 0.8)
+```
+Since P value is less than 0.05 we need to reject null hypothesis and conclude that there exists a correlation between Sales price and Lot area.
+80 percent confidence interval of the test is 0.23 - 0.29
+
+Null Hypothesis: There is no corrleation between TotalBsmtSF and SalePrice 
+Alternative Hypothesis: There exists correlation between TotalBsmtSF and SalePrice
+
+```{r}
+cor.test(train$SalePrice, train$TotalBsmtSF, conf.level = 0.8)
+
+```
+
+
+Since the p value of the test is less than 0.05 we reject the null hypothesis and conclude that there is correlation between TotalBsmtSF and SalePrice
+
+80 percent confidence interval of the test is 0.5792077 - 0.6239328
+
+### Linear Algebra and Correlation. 
+
+```{r}
+precision_mat <- solve(cormat)
+cor_prec <- cormat %*% precision_mat
+cor_prec
+prec_cor <-   precision_mat %*% cormat
+prec_cor
+lu(cormat)
+```
+
+#### Calculus-Based Probability & Statistics.
+
+```{r}
+(fd <- fitdistr(train$LotArea, "exponential"))
+fd$estimate
+values <- rexp(10000, rate = fd$estimate)
+par(mfrow=c(1,2))
+hist(train$LotArea, breaks=100, prob=TRUE, xlab="Lot Area",
+     main="Lot Area Dist")
+hist(values, breaks=100, prob=TRUE, xlab="Simulation",
+     main="Exp Dist")
+```
+
+Lot Area fits a exponential distribution. 
+
+#### 5th and 95th percentiles 
+
+```{r}
+Fn <- ecdf(values)
+values[Fn(values)==0.05]
+values[Fn(values)==0.95]
+t.test(values)$conf.int
+t.test(train$LotArea)$conf.int
+```
+
+### Modeling.  
+
+
+```{r}
+#1] Find out variables with missing values
+names(train[, colSums(is.na(train)) > 0])
+
+#2] Remove unnecessary variables
+train <-train[, !colnames(train) %in% names(train[, colSums(is.na(train)) > 0])]
+
+test <- test[, !colnames(test) %in% names(train[, colSums(is.na(train)) > 0])]
+
+#3] Create dummy variables
+
+train <- train%>%
+  mutate_if(is.character, as.factor)%>%
+  mutate_if(is.factor, as.integer)
+
+test <- test %>%
+   mutate_if(is.character, as.factor)%>%
+  mutate_if(is.factor, as.integer)
+
+#4] Clean Dataframe
+train <- na.omit(train)
+#6] Log transform sales price
+train$SalePrice = log(train$SalePrice)
+#5] Fit model
+fit <- lm(SalePrice~., data = train)
+```
+#### Residual Analysis
+
+```{r}
+plot(fit)
+```
+
+Residuals plot indicates that assumptions of multiple regression model are not satisfied. The residuals are not normally distributed and they are heteroscedastic. There are also possible outliers and high leverage points which can be corrected. In short this is not a very good model filt and there is a lot of chance for improvement
+
+```{r}
+predicted <- predict(fit, test)
+```
+
+
+#### Kaggle Submission
+
+Username **sachid **. Final score  **0.20829**.
+
+I am not doing a very good job in terms of model score. This justifies the above comment of poor model fit. There is a lot of chance to improve this model which will boost up the score eventually.
