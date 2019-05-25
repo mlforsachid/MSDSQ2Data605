@@ -1,0 +1,50 @@
+---
+title: "Data 605 Homework Week-9"
+output:
+  html_document:
+    css: ./lab.css
+    highlight: pygments
+    theme: cerulean
+  pdf_document: default
+---
+
+##---------------------------------------------------------------------------
+###**Student Name :** Sachid Deshmukh
+###**Date :** 03/27/2019
+
+* > [GitHub Location for rmd 
+file](https://github.com/mlforsachid/MSDSQ2Data605/blob/master/Week9/HW-9/SachidVijay.Deshmukh60.Rmd)
+
+* > [RPubs location of published file](http://rpubs.com/sachid/Data605Week9HW)
+
+##---------------------------------------------------------------------------
+
+### 11 page 363
+
+
+```{r}
+sim.time.series = function(start = 100, n = 10000)
+{
+  time.series = c()
+  for (i in 1:n)
+  {
+    time.series[i] = start + sum(rnorm(364, 0, 0.25))
+     
+  }
+  return(time.series)
+}
+
+sim.series = sim.time.series()
+
+p.gt.100 = length(sim.series[sim.series >=100])/ length(sim.series)
+p.gt.110 = length(sim.series[sim.series >=110])/ length(sim.series)
+p.gt.120 = length(sim.series[sim.series >=120])/ length(sim.series)
+print(p.gt.100)
+print(p.gt.110)
+print(p.gt.120)
+
+```
+
+```{r}
+knitr::include_graphics("https://github.com/mlforsachid/MSDSQ2Data605/blob/master/Week9/HW-9/HW-9.png?raw=true")
+```
